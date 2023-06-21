@@ -1,9 +1,11 @@
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css"
 export default function App() {
+  const lstodos = JSON.parse(localStorage.getItem('todos'))  || []
+
   const [todo, setTodo] = useState("");
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(lstodos);
   const [btnText, setBtnText] = useState("Add");
   const [editIndex, setEditIndex] = useState(null);
 
@@ -18,13 +20,14 @@ export default function App() {
      
 
         setTodos([...todos, todo]);
+       
         setTodo("");
       } else {
         // Save changes to the edited todo
         const updatedTodos = [...todos];
         updatedTodos[editIndex] = todo;
         setTodos(updatedTodos);
-  
+        
         setTodo("");
         setBtnText("Add");
         setEditIndex(null);
@@ -35,6 +38,7 @@ export default function App() {
   const removeTodo = (index) => {
     const updatedTodos = todos.filter((todo, i) => i !== index);
     setTodos(updatedTodos);
+   
   };
 
   const editTodo = (index) => {
@@ -45,6 +49,10 @@ export default function App() {
     setEditIndex(index);
   };
 
+  useEffect(()=>{
+    localStorage.setItem('todos',JSON.stringify(todos))
+  },[todos])
+  
   return (
     <div className="container mt-5">
      
@@ -54,14 +62,15 @@ export default function App() {
         value={todo}
         onChange={(e) => setTodo(e.target.value)}
         className="form-control"
+        placeholder="Enter todo"
       />
       <input type="button" value={btnText} onClick={handleClick} className="btn btn-success" />
       </div>
       <ol className="list-unstyled">{
-        todos.length===0 ? <>No todo to display</> : <>
+        todos.length===0 ? <h5 className="text-center mt-3">No todo to display</h5> : <>
         {todos.map((todo, index) => (
-          <li key={index} className=" bg-light my-3 p-3">
-            {todo}
+          <li key={index} className=" bg-light my-3 py-3 border rounded">
+           <span className="mx-3"> {todo}</span>
             <button onClick={() => removeTodo(index)} className="btn btn-danger" >X</button>
             <button onClick={() => editTodo(index)} className="btn btn-info">Edit</button>
           </li>

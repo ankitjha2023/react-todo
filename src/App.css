@@ -1,17 +1,20 @@
-::-webkit-scrollbar{
-    display: none;
-}
 li{
     position: relative;
+    font-size: 17px; 
 }
-.btn-danger{
+
+li .btn{
     position: absolute;
+    bottom: 10px;
+}
+
+.btn-danger{
+   
     right: 5px;
+    
 }
 .btn-info{
-    position: absolute;
+    
     right: 50px;
-}
-li .btn{
-    bottom: 10px;
+    
 }
