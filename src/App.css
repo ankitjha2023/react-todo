@@ -3,18 +3,24 @@ li{
     font-size: 17px; 
 }
 
-li .btn{
+.fa-solid{
     position: absolute;
-    bottom: 10px;
+    font-size: 20px;
+    top: 20px;
 }
 
-.btn-danger{
+.fa-trash{
    
     right: 5px;
     
 }
-.btn-info{
+.fa-edit{
     
-    right: 50px;
+    right: 30px;
     
+}
+
+.form-control{
+    border: 1px solid black;
+    box-shadow: none !important;
 }

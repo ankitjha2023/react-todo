@@ -56,7 +56,7 @@ export default function App() {
   return (
     <div className="container mt-5">
      
-      <div className="d-flex gap-3 col-md-6 mx-auto">
+      <div className="d-flex gap-1 col-md-6 mx-auto">
       <input
         type="text"
         value={todo}
@@ -65,14 +65,15 @@ export default function App() {
         placeholder="Enter todo"
       />
       <input type="button" value={btnText} onClick={handleClick} className="btn btn-success" />
+      <button className="btn btn-danger" onClick={()=>setTodos([])}>Clear</button>
       </div>
       <ol className="list-unstyled">{
         todos.length===0 ? <h5 className="text-center mt-3">No todo to display</h5> : <>
         {todos.map((todo, index) => (
           <li key={index} className=" bg-light my-3 py-3 border rounded">
            <span className="mx-3"> {todo}</span>
-            <button onClick={() => removeTodo(index)} className="btn btn-danger" >X</button>
-            <button onClick={() => editTodo(index)} className="btn btn-info">Edit</button>
+            <i onClick={() => removeTodo(index)} className="fa-solid fa-trash text-danger" ></i>
+            <i onClick={() => editTodo(index)} className="fa-solid fa-edit text-info"></i>
           </li>
         ))}
         </>
